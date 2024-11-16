@@ -3,7 +3,7 @@ import { blog_data } from "@/Assets/assets";
 import React, { useState, useEffect } from "react";
 import BlogItem from "./BlogItem";
 
-function BlogList() {
+export default function BlogList() {
   const [menu, setMenu] = useState("All");
 
   return (
@@ -55,5 +55,5 @@ function BlogList() {
   );
 }
 
-export default BlogList;
+
 
