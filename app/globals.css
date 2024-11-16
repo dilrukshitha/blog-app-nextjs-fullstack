@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom hover effect for social media icons */
+.social-icon {
+  display: inline-block;
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.social-icon:hover {
+  transform: translateY(-5px) scale(1.1); /* 3D popup look */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Add a shadow effect */
+}
