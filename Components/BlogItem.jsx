@@ -4,10 +4,16 @@ import Link from "next/link";
 
 function BlogItem({ title, description, category, image, id }) {
   return (
-    <div className="max-w-[330px] bg-[#FFF7E9] border border-gray-400 hover:border-gray-800 rounded-sm shadow-sm hover:shadow-lg transition-transform transform hover:scale-105 overflow-hidden">
+    <div className="w-[330px] bg-[#FFF7E9] border border-gray-400 hover:border-gray-800 rounded-sm shadow-sm hover:shadow-lg transition-transform transform hover:scale-105 overflow-hidden">
       {/* Image */}
-      <div className="relative h-[180px] w-full">
-        <Image src={image} alt={title} className="rounded-t-sm" />
+      <div className="relative h-[200px] w-full">
+        <Image
+          src={image}
+          alt={title}
+          layout="fill" // Dynamically fills the parent container
+          objectFit="cover" // Ensures consistent aspect ratio by cropping excess
+          className="rounded-t-sm" // Adds the border-radius for styling
+        />
       </div>
 
       {/* Content */}
@@ -23,11 +29,15 @@ function BlogItem({ title, description, category, image, id }) {
         </h3>
 
         {/* Description */}
-        <p className="text-sm text-gray-600">
-          {description.length > 80
-            ? `${description.substring(0, 77)}...`
-            : description}
-        </p>
+        <p
+          className="text-sm text-gray-600"
+          dangerouslySetInnerHTML={{
+            __html:
+              description.length > 120
+                ? `${description.slice(0, 120)}...`
+                : description,
+          }}
+        ></p>
 
         {/* Read More Link */}
         <Link

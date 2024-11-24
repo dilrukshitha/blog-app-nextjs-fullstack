@@ -1,8 +1,26 @@
-import React from "react";
+'use client'
+import { toast } from 'react-toastify';
+import React, { useState } from "react";
 import { assets } from "@/Assets/assets";
 import Image from "next/image";
+import axios from "axios";
 
 const Header = () => {
+  const [email, setEmail] = useState("");
+
+  const onSubmitHandler = async (e)=>{
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("email", email); 
+    const response = await axios.post('/api/email', formData);
+    if(response.data.success){
+      toast.success("Email added successfully");
+      setEmail("");
+    }else{
+      toast.error(response.data.message);
+    }
+  }
+
   return (
     <>
       <div className="px-[5%] py-5 w-full flex gap-[40%] lg:gap-[60%] flex-wrap flex-row justify-center content-start items-center">
@@ -22,8 +40,10 @@ const Header = () => {
           Find the latest Blogs news from WIRED. See related science and
           technology articles, photos, slideshows and videos
         </div>
-        <form className="flex w-full max-w-[500px] justify-start items-center border border-solid border-black shadow-[-6px_6px_0px_#000000]">
+        <form onSubmit={onSubmitHandler} className="flex w-full max-w-[500px] justify-start items-center border border-solid border-black shadow-[-6px_6px_0px_#000000]">
           <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             type="email"
             placeholder="Enter your email"
             className="flex-grow min-w-0 px-4 py-3 outline-none max-w-full"
